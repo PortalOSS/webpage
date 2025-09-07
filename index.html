@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portal</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      overflow: hidden; /* Prevent scrolling */
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #000;
+    }
+
+    #fullscreen-image {
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover; /* Cover the whole screen without distortion */
+      user-select: none; /* Prevent text selection */
+      pointer-events: none; /* Optional: prevent dragging */
+    }
+  </style>
+</head>
+<body>
+  <img id="fullscreen-image" src="https://framerusercontent.com/images/P7gyg7JvGwAdG99AVpSDsrmnK0.png" alt="Locked Image">
+
+  <script>
+    // Disable right-click context menu
+    document.addEventListener('contextmenu', event => event.preventDefault());
+
+    // Optional: disable keyboard shortcuts like F12 or Ctrl+Shift+I
+    document.addEventListener('keydown', function(e) {
+      if (
+        e.key === 'F12' || 
+        (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'i') ||
+        (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'j') ||
+        (e.ctrlKey && e.key.toLowerCase() === 'u')
+      ) {
+        e.preventDefault();
+      }
+    });
+  </script>
+</body>
+</html>
