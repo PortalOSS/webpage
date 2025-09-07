@@ -1,51 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Portal</title>
-  <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-      overflow: hidden; /* Prevent scrolling */
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Locked Fullscreen Image</title>
+<style>
+  html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden; /* Prevent scrolling */
+  }
 
-    body {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background: #000;
-    }
+  body {
+    background: url('https://framerusercontent.com/images/P7gyg7JvGwAdG99AVpSDsrmnK0.png') no-repeat center center fixed;
+    background-size: cover; /* Fullscreen */
+    user-select: none;      /* Prevent text selection */
+    -webkit-user-drag: none; /* Prevent dragging on Safari/Chrome */
+  }
 
-    #fullscreen-image {
-      width: 100vw;
-      height: 100vh;
-      object-fit: cover; /* Cover the whole screen without distortion */
-      user-select: none; /* Prevent text selection */
-      pointer-events: none; /* Optional: prevent dragging */
-    }
-  </style>
+  /* Transparent overlay to block clicks or drag events */
+  #overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 9999;
+  }
+</style>
 </head>
 <body>
-  <img id="fullscreen-image" src="https://framerusercontent.com/images/P7gyg7JvGwAdG99AVpSDsrmnK0.png" alt="Locked Image">
 
-  <script>
-    // Disable right-click context menu
-    document.addEventListener('contextmenu', event => event.preventDefault());
+<div id="overlay"></div>
 
-    // Optional: disable keyboard shortcuts like F12 or Ctrl+Shift+I
-    document.addEventListener('keydown', function(e) {
-      if (
-        e.key === 'F12' || 
-        (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'i') ||
-        (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'j') ||
-        (e.ctrlKey && e.key.toLowerCase() === 'u')
-      ) {
-        e.preventDefault();
-      }
-    });
-  </script>
+<script>
+  // Disable right-click context menu
+  document.addEventListener('contextmenu', e => e.preventDefault());
+
+  // Disable keyboard shortcuts (F12, Ctrl+Shift+I/J, Ctrl+U)
+  document.addEventListener('keydown', function(e) {
+    if (
+      e.key === 'F12' || 
+      (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'i') ||
+      (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'j') ||
+      (e.ctrlKey && e.key.toLowerCase() === 'u')
+    ) {
+      e.preventDefault();
+    }
+  });
+
+  // Block drag events globally
+  document.addEventListener('dragstart', e => e.preventDefault());
+</script>
+
 </body>
 </html>
+
